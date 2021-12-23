@@ -31,7 +31,7 @@ while(typeMax>=12){
     rm=rm+(12%largeLenth);
     if(12%largeLenth>smallLenth && typeSmall>0){
       var large=12%largeLenth;
-      while(large>smallLenth && rm>smallLenth){
+      while(large>=smallLenth && rm>smallLenth && typeSmall>0){
         typeSmall=typeSmall-smallLenth;
         large=large-smallLenth;
           rm=rm-smallLenth;
@@ -51,7 +51,7 @@ if(typeMax>0){
     rm=rm+(12-typeMax);
     if(12%largeLenth>smallLenth && typeSmall>0){
        large=12%largeLenth;
-      while(large>smallLenth && rm>smallLenth){
+      while(large>=smallLenth && rm>smallLenth && typeSmall>0){
         typeSmall=typeSmall-smallLenth;
         large=large-smallLenth;
           rm=rm-smallLenth;
@@ -63,7 +63,7 @@ if(typeMax>0){
 
    if(rm>smallLenth && typeSmall>0){
        large=rm;
-      while(large>smallLenth){
+      while(large>=smallLenth && typeSmall>0){
         typeSmall=typeSmall-smallLenth;
         large=large-smallLenth;
           rm=rm-smallLenth;
