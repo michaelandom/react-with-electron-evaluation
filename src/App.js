@@ -47,17 +47,31 @@ while(typeMax>=12){
 }
 
 if(typeMax>0){
-
-  rm=rm+(12-typeMax);
-  if(12%largeLenth>smallLenth && typeSmall>0){
-     large=12%largeLenth;
-    while(large>smallLenth && rm>smallLenth){
-      typeSmall=typeSmall-smallLenth;
-      large=large-smallLenth;
-        rm=rm-smallLenth;
+  if(rm!==0){
+    rm=rm+(12-typeMax);
+    if(12%largeLenth>smallLenth && typeSmall>0){
+       large=12%largeLenth;
+      while(large>smallLenth && rm>smallLenth){
+        typeSmall=typeSmall-smallLenth;
+        large=large-smallLenth;
+          rm=rm-smallLenth;
+      }
+      
     }
-    
+  }else{
+   rm=(12-typeMax);
+
+   if(rm>smallLenth && typeSmall>0){
+       large=rm;
+      while(large>smallLenth){
+        typeSmall=typeSmall-smallLenth;
+        large=large-smallLenth;
+          rm=rm-smallLenth;
+      }
+      
+    }
   }
+  
   typeOneCounter++;
   }
 
