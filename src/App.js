@@ -5,34 +5,77 @@ function App() {
      const [answer,setAnswer] =useState();
 const {register,handleSubmit,formState: { errors } } =useForm({defaultValues:{}});
 const onSubmit=({lenth1,quantity1,lenth2,quantity2})=>{
-var smallLenth=lenth1<lenth2?lenth1:lenth2;
-var typeMax=lenth1>lenth2?lenth1*quantity1:lenth2*quantity2;
-var typeSmall=lenth1>lenth2?lenth2*quantity2:lenth1*quantity1;
+var smallLenth=0;
+var largeLenth=0;
+var typeMax=0;
+var typeSmall=0;
+if(lenth1>lenth2){
+  typeMax=lenth1*quantity1;
+  typeSmall=lenth2*quantity2;
+  smallLenth=lenth2;
+  largeLenth=lenth1;
+}else{
+
+  typeMax=lenth2*quantity2;
+  typeSmall=lenth1*quantity1;
+  smallLenth=lenth1;
+  largeLenth=lenth2;
+}
 var rm=0;
 var typeOneCounter=0;
 var typeTwoCounter=0;
 while(typeMax>=12){
 
-  typeMax=typeMax-12;
+  if(12%largeLenth!==0){
+    typeMax=typeMax-largeLenth;
+    rm=rm+(12%largeLenth);
+    if(12%largeLenth>smallLenth && typeSmall>0){
+      var large=12%largeLenth;
+      while(large>smallLenth && rm>smallLenth){
+        typeSmall=typeSmall-smallLenth;
+        large=large-smallLenth;
+          rm=rm-smallLenth;
+      }
+      
+    }
+  }else{
+    typeMax=typeMax-12;
+  }
+  
+
   typeOneCounter=typeOneCounter+1;
 }
 
 if(typeMax>0){
-  rm=12-typeMax;
+
+  rm=rm+(12-typeMax);
+  if(12%largeLenth>smallLenth && typeSmall>0){
+     large=12%largeLenth;
+    while(large>smallLenth && rm>smallLenth){
+      typeSmall=typeSmall-smallLenth;
+      large=large-smallLenth;
+        rm=rm-smallLenth;
+    }
+    
+  }
   typeOneCounter++;
   }
-if(rm>smallLenth){
-  typeSmall=typeSmall-rm;
-  rm=0;
-}
 
 while(typeSmall>=12){
 
-  typeSmall=typeSmall-12;
+  
+  if(12%smallLenth!==0){
+  typeSmall=typeSmall-smallLenth;
+    rm=rm+(12%smallLenth);
+  }else{
+    typeSmall=typeSmall-12;
+
+  }
   typeTwoCounter=typeTwoCounter+1;
 }
+
 if(typeSmall>0){
-rm=12-typeSmall;
+rm=rm+(12-typeSmall);
   typeTwoCounter++;
 }
 setAnswer(`${typeOneCounter+typeTwoCounter} rebars are needed and ${rm} meter will end up as wastage`);
