@@ -7,7 +7,7 @@ const {register,handleSubmit,formState: { errors } } =useForm({defaultValues:{}}
 const onSubmit=({lenth1,quantity1,lenth2,quantity2})=>{
 var smallLenth=lenth1<lenth2?lenth1:lenth2;
 var typeMax=lenth1>lenth2?lenth1*quantity1:lenth2*quantity2;
-var typeSmall=lenth1<lenth2?lenth1*quantity1:lenth2*quantity2;
+var typeSmall=lenth1>lenth2?lenth2*quantity2:lenth1*quantity1;
 var rm=0;
 var typeOneCounter=0;
 var typeTwoCounter=0;
