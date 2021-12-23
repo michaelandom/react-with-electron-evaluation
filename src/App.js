@@ -5,15 +5,37 @@ function App() {
      const [answer,setAnswer] =useState();
 const {register,handleSubmit,formState: { errors } } =useForm({defaultValues:{}});
 const onSubmit=({lenth1,quantity1,lenth2,quantity2})=>{
-var total=(quantity1*lenth1)+(quantity2*lenth2);
-var answer=0;
-var rem=total%12;
-if(rem===0){
-answer=total/12;
-}else{
-     answer=(Math.floor(total/12))+1;
+var smallLenth=lenth1<lenth2?lenth1:lenth2;
+var typeMax=lenth1>lenth2?lenth1*quantity1:lenth2*quantity2;
+var typeSmall=lenth1<lenth2?lenth1*quantity1:lenth2*quantity2;
+var rm=0;
+var typeOneCounter=0;
+var typeTwoCounter=0;
+while(typeMax>=12){
+
+  typeMax=typeMax-12;
+  typeOneCounter=typeOneCounter+1;
 }
-setAnswer(`${answer} rebars are needed and ${rem===0?0:12-rem} meter will end up as wastage`);
+
+if(typeMax>0){
+  rm=12-typeMax;
+  typeOneCounter++;
+  }
+if(rm>smallLenth){
+  typeSmall=typeSmall-rm;
+  rm=0;
+}
+
+while(typeSmall>=12){
+
+  typeSmall=typeSmall-12;
+  typeTwoCounter=typeTwoCounter+1;
+}
+if(typeSmall>0){
+rm=12-typeSmall;
+  typeTwoCounter++;
+}
+setAnswer(`${typeOneCounter+typeTwoCounter} rebars are needed and ${rm} meter will end up as wastage`);
 }
 return (
      <div className="w-75 m-auto  p-3 shadow-lg">
